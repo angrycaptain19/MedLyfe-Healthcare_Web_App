@@ -6,6 +6,4 @@ class Hospitals():
 
     def list_hospitals(self):
         df = pd.read_csv("dataset/hospitals.csv", names=['CITY', 'HOSPITAL NAME', 'ADDRESS', 'PINCODE'])
-        selected = df.loc[df['PINCODE'] == f'{self.pincode}'].values.tolist()
-
-        return(selected)
+        return df.loc[df['PINCODE'] == f'{self.pincode}'].values.tolist()

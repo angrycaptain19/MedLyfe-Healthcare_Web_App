@@ -108,43 +108,42 @@ def disease_prediction():
 @app.route('/diseases_detected' , methods = ['GET', 'POST'])
 def diseases_detected():
     
-    if request.method == 'POST':
+    if request.method != 'POST':
 
-        symptom1 = request.form['Symptom_1']
-        symptom2 = request.form['Symptom_2']
-        symptom3 = request.form['Symptom_3']
-        symptom4 = request.form['Symptom_4']
-        symptom5 = request.form['Symptom_5']
+        return render_template('disease-prediction.html', symptoms=sorted(symptoms))
+    symptom1 = request.form['Symptom_1']
+    symptom2 = request.form['Symptom_2']
+    symptom3 = request.form['Symptom_3']
+    symptom4 = request.form['Symptom_4']
+    symptom5 = request.form['Symptom_5']
 
-        if symptom3 == 'Choose':
-            symptom3 = 0
+    if symptom3 == 'Choose':
+        symptom3 = 0
 
-        if symptom4 == 'Choose':
-            symptom4 = 0
+    if symptom4 == 'Choose':
+        symptom4 = 0
 
-        if symptom5 == 'Choose':
-            symptom5 = 0
+    if symptom5 == 'Choose':
+        symptom5 = 0
 
-        global predicted_disease
+    global predicted_disease
 
-        predict = Predict(symptom1,symptom2, symptom3, symptom4, symptom5)
-        predicted_disease = predict.symptom_predicition()
-        predicted_disease = predicted_disease[0]
-        #print(predicted_disease)
+    predict = Predict(symptom1,symptom2, symptom3, symptom4, symptom5)
+    predicted_disease = predict.symptom_predicition()
+    predicted_disease = predicted_disease[0]
+    #print(predicted_disease)
 
-        
 
-        dis = Description(f'{predicted_disease}')
-        txt = dis.display()
-        print(txt)
 
-        dis2 = Precaution(f'{predicted_disease}')
-        txt2 = dis2.display()
-        print(txt2)
-        
-        return render_template('result.html', predicted_disease=predicted_disease, txt=txt, txt2=txt2)
+    dis = Description(f'{predicted_disease}')
+    txt = dis.display()
+    print(txt)
 
-    return render_template('disease-prediction.html', symptoms=sorted(symptoms))
+    dis2 = Precaution(f'{predicted_disease}')
+    txt2 = dis2.display()
+    print(txt2)
+
+    return render_template('result.html', predicted_disease=predicted_disease, txt=txt, txt2=txt2)
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
