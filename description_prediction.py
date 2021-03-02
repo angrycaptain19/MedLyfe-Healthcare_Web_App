@@ -7,8 +7,9 @@ class Description():
     def display(self):
         
         description = pd.read_csv('dataset/symptom_Description.csv')
-        desp = list(description[description['Disease'] == f'{self.disease}']['Description'])[0]
-        return(desp)
+        return list(
+            description[description['Disease'] == f'{self.disease}']['Description']
+        )[0]
 
 if __name__ == "__main__":
     dis = Description('Migraine')

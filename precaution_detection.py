@@ -8,9 +8,7 @@ class Precaution():
         
         df = pd.read_csv('dataset/symptom_precaution.csv')
         idx = df[df['Disease'] == f'{self.disease}'].index[0]
-        precautions = list(df.iloc[idx])[1:]    
-        
-        return(precautions)
+        return list(df.iloc[idx])[1:]
 
 if __name__ == "__main__":
     dis = Precaution('Migraine')
